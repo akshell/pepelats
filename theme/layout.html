@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="/_static/main.css" type="text/css">
+    <link rel="shortcut icon" href="/_static/favicon.ico">
+    <title>{{ title|striptags|e }} - Akshell</title>
+  </head>
+  <body>
+    <div class="container">
+      {% if theme_logo|tobool %}
+        <a href="/">
+          <img src="/_static/logo.png" alt="Akshell">
+        </a>
+      {% endif %}
+      <div class="content">
+        <div class="doc{% if theme_bars|tobool %} {% if pagename == 'index' %}index{% else %}with-bars{% endif %}{% endif %}">
+          {% block body %}{% endblock %}
+        </div>
+        {% if theme_bars|tobool and pagename != 'index' %}
+          <div class="sidebar">
+            <h3>Contents</h3>
+            <div class="sidebar-section">{{ toc }}</div>
+            <h3>Browse</h3>
+            <div class="sidebar-section">
+              <ul>
+                {% if prev %}
+                  <li>
+                    Prev: <a href="{{ prev.link|e }}">{{ prev.title }}</a>
+                  </li>
+                {% endif %}
+                {% if next %}
+                  <li>
+                    Next: <a href="{{ next.link|e }}">{{ next.title }}</a>
+                  </li>
+                {% endif %}
+                <li>
+                  <a href="{{ pathto('contents') }}">Table of Contents</a>
+                </li>
+                <li>
+                  <a href="{{ pathto('genindex') }}">Index</a>
+                </li>
+              </ul>
+            </div>
+            <h3>You are here:</h3>
+            <ul>
+              <li>
+                <a href="{{ pathto('index') }}">
+                  Akshell {{ version }} Documentation
+                </a>
+                {% for parent in parents %}
+                  <ul><li><a href="{{ parent.link|e }}">{{ parent.title }}</a>
+                {% endfor %}
+                <ul><li>{{ title }}</li></ul>
+                {% for parent in parents %}</li></ul>{% endfor %}
+              </li>
+            </ul>
+          </div>
+          <div class="navbar">
+            {% if prev %}<a class="prev" href="{{ prev.link|e }}">Prev</a>{% endif %}
+            {% if next %}<a class="next" href="{{ next.link|e }}">Next</a>{% endif %}
+            {% if parents %}
+              <a href="{{ parents[-1].link|e }}">Up</a> |
+            {% endif %}
+            <a href="{{ pathto('index') }}">Home</a> |
+            <a href="{{ pathto('contents') }}">Table of Contents</a> |
+            <a href="{{ pathto('genindex') }}">Index</a> |
+          </div>
+        {% endif %}
+      </div>
+      <div class="push-footer"></div>
+    </div>
+    {% if theme_footer|tobool %}
+      <div class="footer">
+        <a href="http://blog.akshell.com/">Blog</a> |
+        <a href="http://twitter.com/akshell_com">Twitter</a> |
+        <a href="/terms/">Terms of Service</a> |
+        <a href="/privacy/">Privacy Policy</a> |
+        &copy; 2010 by Anton Korenyushkin
+      </div>
+    {% endif %}
+  </body>
+</html>
