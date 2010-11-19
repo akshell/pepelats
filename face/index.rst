@@ -2,4 +2,4 @@
 
 .. raw:: html
 
-   <a href="http://ide.akshell.com">Try It Now, Free!</a>
+   <a href="/ide/">Try It Now, Free!</a>
