@@ -1,0 +1,11 @@
+{
+    "plugins": ["embedded", "appconfig", "whitetheme", "js_syntax", "html", "stylesheet"],
+    "config": {
+      "stealFocus": true,
+      "settings": {
+        "theme": "white",
+        "fontface": "Menlo, Consolas, Lucida Console, monospace",
+        "tabstop": 2
+      }
+    }
+}
