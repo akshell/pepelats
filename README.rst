@@ -5,7 +5,11 @@ Akshell Deployer
 Bootstrapping Plan
 ==================
 
+* backup the linode;
+* apt-get update;
+* apt-get upgrade;
 * create the akshell user via adduser --home /akshell akshell;
+* add him to sudoers via visudo;
 * set up his .ssh/;
 * add his public SSH key to github;
 * remove sys.path.append('/ak') from /usr/lib/python2.5/sitecustomize.py;
