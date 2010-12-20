@@ -146,6 +146,7 @@ def deploy(name, *args):
     if name in ('ecilop', 'patsak'):
         refresh('ecilop')
 
+
 def bootstrap():
     sudo('apt-get -y install libpq-dev curl')
 
