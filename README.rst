@@ -16,4 +16,5 @@ Bootstrapping Plan
 * write new replace.py into /usr/local/bin/replace;
 * make it executable;
 * run in pepelats: fab -R com bootstrap;
-* run in old chatlanian: fab -R combat chatlanian send replace.
+* run in old chatlanian: fab -R combat chatlanian send replace;
+* add "-t 0" option to DAEMON_OPTS in /etc/default/varnish and restart varnish.
