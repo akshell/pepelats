@@ -122,7 +122,20 @@ def send(name, *args):
     globals()['_send_' + name](*args)
 
 
+def refresh(name):
+    if name == 'ecilop':
+        run('killall ecilop')
+    elif name == 'chatlanian':
+        run('touch etc/wsgi.py')
+    else:
+        sudo('/etc/init.d/%s reload' % name)
+
+
 def deploy(name, *args):
+    if name == 'chatlanian':
+        run('cd chatlanian && git pull')
+        refresh('chatlanian')
+        return
     if name == 'kappa':
         update('cappuccino')
         update('bespin')
@@ -130,7 +143,8 @@ def deploy(name, *args):
         update(name)
     build(name, *args)
     send(name, *args)
-
+    if name in ('ecilop', 'patsak'):
+        refresh('ecilop')
 
 def bootstrap():
     sudo('apt-get -y install libpq-dev curl')
