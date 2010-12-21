@@ -19,21 +19,13 @@ _REPOS = {
     'patsak': 'git@github.com:korenyushkin/patsak.git',
     'ecilop': 'git@github.com:korenyushkin/ecilop.git',
     'cappuccino': 'git@github.com:korenyushkin/cappuccino.git',
+    'bespin': 'git@github.com:korenyushkin/bespin.git',
     'kappa': 'git@github.com:korenyushkin/kappa.git',
 }
 
 
 def update(name):
     path = 'repos/' + name
-    if name == 'bespin':
-        if not os.path.exists(path):
-            local('''
-cd repos &&
-wget http://ftp.mozilla.org/pub/mozilla.org/labs/bespin/Embedded/BespinEmbedded-0.9a1.tar.gz &&
-tar -xzf BespinEmbedded-0.9a1.tar.gz &&
-ln -s BespinEmbedded-0.9a1 bespin
-''')
-        return
     if os.path.isdir(path):
         local('cd %s && git fetch' % path)
     else:
