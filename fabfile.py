@@ -27,7 +27,7 @@ _REPOS = {
 def update(name):
     path = 'repos/' + name
     if os.path.isdir(path):
-        local('cd %s && git fetch' % path)
+        local('cd %s && git %s' % (path, 'fetch' if name == 'docs' else 'pull'))
     else:
         os.makedirs(path)
         local('git clone %s %s' % (_REPOS[name], path))
