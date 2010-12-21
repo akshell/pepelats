@@ -100,7 +100,7 @@ def _send_ecilop():
 
 def _send_kappa():
     local('rsync -zr --del repos/kappa/Build/Flattened/ %s:static/kappa/next' % env.host_string)
-    run('cd static/kappa && next=$(expr $(readlink curr) + 1) && mv next $next && ln -sf $next curr')
+    run('cd static/kappa && next=$(expr $(readlink curr) + 1) && mv next $next && rm curr && ln -s $next curr')
 
 
 def _send_etc():
