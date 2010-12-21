@@ -137,6 +137,8 @@ def deploy(name, *args):
     send(name, *args)
     if name in ('ecilop', 'patsak'):
         refresh('ecilop')
+    elif name == 'kappa':
+        refresh('chatlanian')
 
 
 def bootstrap():
