@@ -142,7 +142,21 @@ def deploy(name, *args):
 
 
 def bootstrap():
-    sudo('apt-get -y install libpq-dev curl')
+    sudo('apt-get -y install libpq-dev curl libcurl3-dev libexpat-dev')
+
+    run('''
+mkdir work
+cd work
+wget http://kernel.org/pub/software/scm/git/git-1.7.3.4.tar.bz2
+tar -xjf git-1.7.3.4.tar.bz2
+rm git-1.7.3.4.tar.bz2
+cd git-1.7.3.4
+export NO_TCLTK=1
+./configure
+make
+''')
+    sudo('cd work/git-1.7.3.4 && make install')
+    run('git config --global core.askpass true')
 
     sudo('''
 curl http://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
