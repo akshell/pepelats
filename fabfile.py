@@ -73,7 +73,7 @@ def _build_kappa():
     local('rm -rf repos/kappa/Frameworks')
     local('mv repos/cappuccino/Build/Release repos/kappa/Frameworks')
     local('cd repos/kappa && jake Flattened')
-    local('cd repos/bespin && python dryice.py -j compressors/compiler.jar ../../bespin.json')
+    local('cd repos/bespin && python dryice.py -j compressors/compiler.jar manifest.json')
     local('mv repos/bespin/build repos/kappa/Build/Flattened/Resources/Bespin')
 
 
@@ -99,7 +99,7 @@ def _send_ecilop():
 
 
 def _send_kappa():
-    local('rsync -zr --del repos/kappa/Build/Flattened/ %s:static/kappa/next' % env.host_string)
+    local('rsync -zr repos/kappa/Build/Flattened/ %s:static/kappa/next' % env.host_string)
     run('cd static/kappa && next=$(expr $(readlink curr) + 1) && mv next $next && rm curr && ln -s $next curr')
 
 
