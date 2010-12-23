@@ -61,11 +61,11 @@ def _build_docs(version):
 
 
 def _build_patsak():
-    local('cd repos/patsak && git checkout origin/master && scons patsak')
+    local('cd repos/patsak && scons patsak')
 
 
 def _build_ecilop():
-    local('cd repos/ecilop && git checkout origin/master && make ecilop')
+    local('cd repos/ecilop && make ecilop')
 
 
 def _build_kappa():
