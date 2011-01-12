@@ -34,6 +34,7 @@ def update(name):
 
 
 def _build_face():
+    local('rm -rf build/face') # Sphinx recompiles face slowly
     src_path = os.path.abspath('face')
     Sphinx(
         src_path,
@@ -41,6 +42,7 @@ def _build_face():
         'build/face/dirhtml',
         'build/face/doctrees',
         'dirhtml').build()
+    local('cp face/index.html build/face/dirhtml/')
 
 
 def _build_docs(version):
