@@ -17,15 +17,19 @@ div.container {
     height: 100%;
     position: relative;
     width: 960px;
-    margin: 21px auto -22px;
+    margin: 0px auto -22px;
     text-align: left;
     overflow: hidden;
+}
+
+img.logo, div.content, div.sidebar {
+    float: left;
+    margin-top: 21px;
 }
 
 img.logo {
     display: block;
     width: 180px;
-    float: left;
 }
 
 div.content {
@@ -33,7 +37,6 @@ div.content {
     margin-left: 30px;
     margin-right: 30px;
     margin-bottom: 84px;
-    float: left;
 }
 
 div.breadcrumbs {
@@ -42,7 +45,6 @@ div.breadcrumbs {
 }
 
 div.sidebar {
-    float: left;
     width: 180px;
     font-size: 12px;
 }
