@@ -58,7 +58,10 @@ def _build_docs(version):
         {
             'html_theme_path': [os.path.abspath('.')],
             'html_theme': 'theme',
-            'html_theme_options': {'navigation': 'true'},
+            'html_theme_options': {
+                'sidebar': 'True',
+                'index_title': 'Documentation',
+            },
         }).build()
 
 

@@ -14,14 +14,17 @@
       </a>
       <div class="content">
         <div class="breadcrumbs">
-          {% if theme_navigation|tobool and pagename != 'index' %}
-            <a href="{{ pathto('index') }}">Documentation</a> ▸
+          <a href="/">Akshell</a> ▸
+          {% if pagename == 'index' %}
+            {{ theme_index_title }}
+          {% else %}
+            {% if theme_index_title %}
+              <a href="{{ pathto('index') }}">{{ theme_index_title }}</a> ▸
+            {% endif %}
             {% for parent in parents %}
               <a href="{{ parent.link|e }}">{{ parent.title }}</a> ▸
             {% endfor %}
             {{ title }}
-          {% else %}
-            &nbsp;
           {% endif %}
         </div>
         {% block body %}{% endblock %}
@@ -36,7 +39,7 @@
           </div>
         {% endif %}
       </div>
-      {% if theme_navigation|tobool %}
+      {% if theme_sidebar|tobool %}
         <div class="sidebar">
           {% if prev %}
             <a href="{{ prev.link|e }}">Previous</a>&nbsp;
