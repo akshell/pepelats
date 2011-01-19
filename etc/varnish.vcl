@@ -48,3 +48,19 @@ sub vcl_fetch {
     }
     return (deliver);
 }
+
+sub vcl_error {
+    if (obj.status == 503) {
+        set obj.http.Content-Type = "text/html; charset=utf-8";
+        set obj.status = 500;
+        synthetic {"
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head><title>Internal Application Error</title><head>
+  <body><h1>Internal Application Error</h1></body>
+</html>
+"};
+        return (deliver);
+    }
+}
