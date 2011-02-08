@@ -160,7 +160,7 @@ pre {
     background-color: #EDEDED;
 }
 
-div.highlight, div.highlight-javascript {
+div.highlight, div.highlight-javascript, div.highlight-html\+django {
     margin-bottom: 21px;
 }
 
