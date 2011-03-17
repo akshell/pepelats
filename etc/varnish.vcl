@@ -19,11 +19,6 @@ sub vcl_recv {
         error 200 "Purged.";
     }
     set req.url = req.http.host "                                                                                                                                " req.request " " req.url;
-    if (req.http.x-forwarded-for) {
-      set req.http.X-Forwarded-For = req.http.X-Forwarded-For ", " client.ip;
-    } else {
-      set req.http.X-Forwarded-For = client.ip;
-    }
     if (req.request != "GET" &&
         req.request != "HEAD" &&
         req.request != "PUT" &&
