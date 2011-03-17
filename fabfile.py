@@ -19,7 +19,7 @@ _REPOS = {
     'patsak': 'git@github.com:korenyushkin/patsak.git',
     'ecilop': 'git@github.com:korenyushkin/ecilop.git',
     'cappuccino': 'git@github.com:korenyushkin/cappuccino.git',
-    'bespin': 'git@github.com:korenyushkin/bespin.git',
+    'ace': 'git://github.com/ajaxorg/ace.git',
     'kappa': 'git@github.com:korenyushkin/kappa.git',
 }
 
@@ -27,7 +27,9 @@ _REPOS = {
 def update(name):
     path = 'repos/' + name
     if os.path.isdir(path):
-        local('cd %s && git %s' % (path, 'fetch' if name == 'docs' else 'pull'))
+        local(
+            'cd %s && git %s'
+            % (path, 'fetch' if name in ('docs', 'ace') else 'pull'))
     else:
         os.makedirs(path)
         local('git clone %s %s' % (_REPOS[name], path))
@@ -78,8 +80,8 @@ def _build_kappa():
     local('rm -rf repos/kappa/Frameworks')
     local('mv repos/cappuccino/Build/Release repos/kappa/Frameworks')
     local('cd repos/kappa && jake Flattened')
-    local('cd repos/bespin && python dryice.py -j compressors/compiler.jar manifest.json')
-    local('mv repos/bespin/build repos/kappa/Build/Flattened/Resources/Bespin')
+    local('cd repos/ace && git checkout 0.1.6')
+    local('cp -r repos/ace/build/src repos/kappa/Build/Flattened/Resources/ace')
 
 
 def build(name, *args):
@@ -135,7 +137,7 @@ def deploy(name, *args):
         return
     if name == 'kappa':
         update('cappuccino')
-        update('bespin')
+        update('ace')
     if name != 'face':
         update(name)
     build(name, *args)
