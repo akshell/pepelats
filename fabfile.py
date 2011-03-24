@@ -16,11 +16,11 @@ env.roledefs = {
 
 _REPOS = {
     'docs': 'git://github.com/akshell/docs.git',
-    'patsak': 'git@github.com:korenyushkin/patsak.git',
-    'ecilop': 'git@github.com:korenyushkin/ecilop.git',
-    'cappuccino': 'git@github.com:korenyushkin/cappuccino.git',
+    'patsak': 'git@github.com:akshell/patsak.git',
+    'ecilop': 'git@github.com:akshell/ecilop.git',
+    'cappuccino': 'git@github.com:akshell/cappuccino.git',
     'ace': 'git://github.com/ajaxorg/ace.git',
-    'kappa': 'git@github.com:korenyushkin/kappa.git',
+    'kappa': 'git@github.com:akshell/kappa.git',
 }
 
 
@@ -215,7 +215,7 @@ EOF
     _send_etc()
 
     run('ssh-keyscan -t rsa github.com >> .ssh/known_hosts')
-    run('git clone git@github.com:korenyushkin/chatlanian.git')
+    run('git clone git@github.com:akshell/chatlanian.git')
     sudo('sudo -u postgres createuser -s akshell')
     run('createdb akshell')
 
