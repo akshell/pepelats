@@ -44,7 +44,7 @@ def _build_face():
         'build/face/dirhtml',
         'build/face/doctrees',
         'dirhtml').build()
-    local('cp face/index.html build/face/dirhtml/')
+    local('cp face/index.html face/robots.txt build/face/dirhtml/')
 
 
 def _build_docs(version):
