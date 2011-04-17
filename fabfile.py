@@ -24,6 +24,42 @@ _REPOS = {
 }
 
 
+_RESOURCES = [
+    'Frameworks/Objective-J/Objective-J.js',
+    'Resources/Logo90.png',
+    'Resources/ProgressBarBezel.png',
+    'Frameworks/AppKit/Resources/CPProgressIndicator/CPProgressIndicatorBarBarRegular0.png',
+    'Frameworks/AppKit/Resources/CPProgressIndicator/CPProgressIndicatorBarBarRegular1.png',
+    'Frameworks/AppKit/Resources/CPProgressIndicator/CPProgressIndicatorBarBarRegular2.png',
+    'Application.js',
+    'Application1.js',
+    'Application2.js',
+    'Application3.js',
+    'Browser.environment/dataURLs.txt',
+    'Frameworks/AppKit/Browser.environment/dataURLs.txt',
+    'Frameworks/AppKit/Resources/Aristo.blend/Browser.environment/dataURLs.txt',
+    'Resources/Editor.html',
+    'Resources/ace/ace.js',
+    'Resources/ace/mode-javascript.js',
+    'Resources/ace/mode-html.js',
+    'Resources/ace/mode-css.js',
+    'Resources/ace/worker-javascript.js',
+    'Resources/AboutPanel.cib',
+    'Resources/ChangePasswordPanel.cib',
+    'Resources/ContactPanel.cib',
+    'Resources/GoToLinePanel.cib',
+    'Resources/KeyPanel.cib',
+    'Resources/LoginPanel.cib',
+    'Resources/MainMenu.cib',
+    'Resources/ManageDomainsPanel.cib',
+    'Resources/MovePanel.cib',
+    'Resources/NewAppPanel.cib',
+    'Resources/ResetPasswordPanel.cib',
+    'Resources/SignupPanel.cib',
+    'Resources/UseLibPanel.cib',
+]
+
+
 def update(name):
     path = 'repos/' + name
     if os.path.isdir(path):
@@ -145,6 +181,13 @@ def deploy(name, *args):
     if name in ('ecilop', 'patsak'):
         refresh('ecilop')
     elif name == 'kappa':
+        version = run('readlink static/kappa/curr')
+        run(
+            'cat <<EOF >static/kappa/%s/manifest\nCACHE MANIFEST\n' % version +
+            ''.join(
+                '/kappa/%s/%s\n' % (version, resource)
+                for resource in _RESOURCES) +
+            'EOF')
         refresh('chatlanian')
 
 
