@@ -14,7 +14,7 @@ env.roledefs = {
 }
 
 
-_REPOS = {
+REPOS = {
     'docs': 'git://github.com/akshell/docs.git',
     'patsak': 'git@github.com:akshell/patsak.git',
     'ecilop': 'git@github.com:akshell/ecilop.git',
@@ -24,7 +24,7 @@ _REPOS = {
 }
 
 
-_RESOURCES = [
+RESOURCES = [
     'Frameworks/Objective-J/Objective-J.js',
     'Resources/Logo90.png',
     'Resources/ProgressBarBezel.png',
@@ -68,7 +68,7 @@ def update(name):
             % (path, 'fetch' if name in ('docs', 'ace') else 'pull'))
     else:
         os.makedirs(path)
-        local('git clone %s %s' % (_REPOS[name], path))
+        local('git clone %s %s' % (REPOS[name], path))
 
 
 def _build_face():
@@ -182,12 +182,15 @@ def deploy(name, *args):
         refresh('ecilop')
     elif name == 'kappa':
         version = run('readlink static/kappa/curr')
-        run(
-            'cat <<EOF >static/kappa/%s/manifest\nCACHE MANIFEST\n' % version +
-            ''.join(
-                '/kappa/%s/%s\n' % (version, resource)
-                for resource in _RESOURCES) +
-            'EOF')
+        run('''\
+cat <<EOF >static/cache.manifest
+CACHE MANIFEST
+CACHE:
+%s
+NETWORK:
+*
+EOF
+''' % '\n'.join('/kappa/%s/%s' % (version, resource) for resource in RESOURCES))
         refresh('chatlanian')
 
 
